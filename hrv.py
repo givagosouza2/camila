@@ -1,4 +1,15 @@
+# Instalar uma versão específica do Python (se necessário)
+sudo apt install python3.10
+
+# Criar um ambiente virtual com Python 3.10
+python3.10 -m venv venv
+
+# Ativar o ambiente virtual
+source venv/bin/activate
+
+# Instalar o pacote
 pip install hrvanalysis
+
 from hrvanalysis import remove_outliers, remove_ectopic_beats, interpolate_nan_values
 from hrvanalysis import get_time_domain_features, get_frequency_domain_features
 import pandas as pd
