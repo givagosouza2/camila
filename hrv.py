@@ -142,7 +142,7 @@ with col1:
         def calcular_potencia(f, p, faixa):
             idx = np.logical_and(f >= faixa[0], f < faixa[1])
             return np.trapz(p[idx], f[idx])
-        nn_sec = np.array(nn_intervals[t_60minus_hrv, t_30minus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_60minus_hrv:t_30minus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_60minus_30minus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_60minus_30minus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -152,7 +152,7 @@ with col1:
         hf_rel_60minus_30minus = (hf_60minus_30minus / total_60minus_30minus) * 100
         lf_hf_60minus_30minus = lf_60minus_30minus / hf_60minus_30minus
 
-        nn_sec = np.array(nn_intervals[t_30minus_hrv, t_start_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_30minus_hrv:t_start_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_30minus_start = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_30minus_start = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -162,7 +162,7 @@ with col1:
         hf_rel_30minus_start = (hf_30minus_start / total_30minus_start) * 100
         lf_hf_30minus_start = lf_30minus_start / hf_30minus_start
 
-        nn_sec = np.array(nn_intervals[t_start_hrv, t_30plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_start_hrv:t_30plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_start_30plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_start_30plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -172,7 +172,7 @@ with col1:
         hf_rel_start_30plus = (hf_start_30plus / total_start_30plus) * 100
         lf_hf_start_30plus = lf_start_30plus / hf_start_30plus
 
-        nn_sec = np.array(nn_intervals[t_30plus_hrv, t_60plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_30plus_hrv:t_60plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_30plus_60plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_30plus_60plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -182,7 +182,7 @@ with col1:
         hf_rel_30plus_60plus = (hf_30plus_60plus / total_30plus_60plus) * 100
         lf_hf_30plus_60plus = lf_30plus_60plus / hf_30plus_60plus
 
-        nn_sec = np.array(nn_intervals[t_60plus_hrv, t_90plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_60plus_hrv:t_90plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_60plus_90plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_60plus_90plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -192,7 +192,7 @@ with col1:
         hf_rel_60plus_90plus = (hf_60plus_90plus / total_60plus_90plus) * 100
         lf_hf_60plus_90plus = lf_60plus_90plus / hf_60plus_90plus
 
-        nn_sec = np.array(nn_intervals[t_90plus_hrv, t_120plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_90plus_hrv:t_120plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_90plus_120plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_90plus_120plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -202,7 +202,7 @@ with col1:
         hf_rel_90plus_120plus = (hf_90plus_120plus / total_90plus_120plus) * 100
         lf_hf_90plus_120plus = lf_90plus_120plus / hf_90plus_120plus
 
-        nn_sec = np.array(nn_intervals[t_120plus_hrv, t_150plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_120plus_hrv:t_150plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_120plus_150plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_120plus_150plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -212,7 +212,7 @@ with col1:
         hf_rel_120plus_150plus = (hf_120plus_150plus / total_120plus_150plus) * 100
         lf_hf_120plus_150plus = lf_120plus_150plus / hf_120plus_150plus
 
-        nn_sec = np.array(nn_intervals[t_150plus_hrv, t_180plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_150plus_hrv:t_180plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_150plus_180plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_150plus_180plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -222,7 +222,7 @@ with col1:
         hf_rel_150plus_180plus = (hf_150plus_180plus / total_150plus_180plus) * 100
         lf_hf_150plus_180plus = lf_150plus_180plus / hf_150plus_180plus
 
-        nn_sec = np.array(nn_intervals[t_180plus_hrv, t_210plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_180plus_hrv:t_210plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_180plus_210plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_180plus_210plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -232,7 +232,7 @@ with col1:
         hf_rel_180plus_210plus = (hf_180plus_210plus / total_180plus_210plus) * 100
         lf_hf_180plus_210plus = lf_180plus_210plus / hf_180plus_210plus
 
-        nn_sec = np.array(nn_intervals[t_210plus_hrv, t_240plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_210plus_hrv:t_240plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_210plus_240plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_210plus_240plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -242,7 +242,7 @@ with col1:
         hf_rel_210plus_240plus = (hf_210plus_240plus / total_210plus_240plus) * 100
         lf_hf_210plus_240plus = lf_210plus_240plus / hf_210plus_240plus
 
-        nn_sec = np.array(nn_intervals[t_240plus_hrv, t_270plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_240plus_hrv:t_270plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_240plus_270plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_240plus_270plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
@@ -252,7 +252,7 @@ with col1:
         hf_rel_240plus_270plus = (hf_240plus_270plus / total_240plus_270plus) * 100
         lf_hf_240plus_270plus = lf_240plus_270plus / hf_240plus_270plus
 
-        nn_sec = np.array(nn_intervals[t_270plus_hrv, t_300plus_hrv]) / 1000
+        nn_sec = np.array(nn_intervals[t_270plus_hrv:t_300plus_hrv]) / 1000
         frequencies, psd = calcular_psd(nn_sec, 4)
         vlf_270plus_300plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
         lf_270plus_300plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
