@@ -156,7 +156,7 @@ with col2:
         fig, ax = plt.subplots()
         ax.plot(tempo_rms, rms_norm, 'black')
         ax.plot(tempo_rms, moving_average_tremor, 'r')
-        ax.plot([5, 5], [np.min(rms_norm), np.max(rms_norm)], '--r')
+        ax.plot([tempo_rms[t_start], tempo_rms[t_start]], [np.min(rms_norm), np.max(rms_norm)], '--r')
         ax.plot([4, 4], [np.min(rms_norm), np.max(rms_norm)], '--b')
         ax.set_xlabel('Time (s)')
         ax.set_ylabel('RMS amplitude (g)')
