@@ -335,7 +335,7 @@ with col1:
             file.write("\n".join(str(val)
                        for val in resultados_vlf if not np.isnan(val)))
 
-        with open(output_file, "r") as file:
+        with open(output_file_1, "r") as file:
             contents = file.read()
         st.download_button("Baixar resultados - VLF",
                            data=contents, key='download_results_vlf')
