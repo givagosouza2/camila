@@ -263,11 +263,11 @@ with col1:
         lf_hf_270plus_300plus = lf_270plus_300plus / hf_270plus_300plus
         c1,c2,c3,c4 = st.columns(4)
         with c1:
-            st.text('VLF -60 s a -30 s: ' + str((10**10)*round(vlf_60minus_30minus,3)))
-            st.text('VLF -30 s a 0 s: ' + str((10**10)*round(vlf_30minus_start,3)))
-            st.text('VLF 0 s a 30 s: ' + str((10**10)*round(vlf_start_30plus,3)))
-            st.text('VLF 30 s a 60 s: ' + str((10**10)*round(vlf_30plus_60plus,3)))
-            st.text('VLF 60 s a 90 s: ' + str((10**10)*round(vlf_60plus_90plus,3)))
+            st.text('VLF -60 s a -30 s: ' + str((10**15)*round(vlf_60minus_30minus,3)))
+            st.text('VLF -30 s a 0 s: ' + str((10**15)*round(vlf_30minus_start,3)))
+            st.text('VLF 0 s a 30 s: ' + str((10**15)*round(vlf_start_30plus,3)))
+            st.text('VLF 30 s a 60 s: ' + str((10**15)*round(vlf_30plus_60plus,3)))
+            st.text('VLF 60 s a 90 s: ' + str((10**15)*round(vlf_60plus_90plus,3)))
             st.text('VLF 90 s a 120 s: ' + str((10**10)*round(vlf_90plus_120plus,3)))
             st.text('VLF 120 s a 150 s: ' + str((10**10)*round(vlf_120plus_150plus,3)))
             st.text('VLF 150 s a 180 s: ' + str((10**10)*round(vlf_150plus_180plus,3)))
