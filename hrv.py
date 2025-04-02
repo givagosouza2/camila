@@ -154,18 +154,72 @@ with col2:
         moving_average_tremor = norma_series.rolling(window=1000).mean()
 
         for index, t_val in enumerate(tempo_rms):
+            if t_val >= 4:
+                t_60minus = index
+                break        
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 4.5:
+                t_30minus = index
+                break        
+        for index, t_val in enumerate(tempo_rms):
             if t_val >= 5:
                 t_start = index
                 break
-
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 5.5:
+                t_30plus = index
+                break
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 6:
+                t_60plus = index
+                break        
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 6.5:
+                t_90plus = index
+                break
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 7:
+                t_120plus = index
+                break
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 7.5:
+                t_150plus = index
+                break        
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 8:
+                t_180plus = index
+                break
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 8.5:
+                t_210plus = index
+                break
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 9:
+                t_240plus = index
+                break
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 9.5:
+                t_270plus = index
+                break      
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 10:
+                t_300plus = index
+                break        
         fig, ax = plt.subplots()
         ax.plot(tempo_rms, rms_norm, 'black')
         ax.plot(tempo_rms, moving_average_tremor, 'r')
-        ax.plot([tempo_rms[t_start-300], tempo_rms[t_start-300]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_30minus], tempo_rms[t_30minus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
         ax.plot([tempo_rms[t_start], tempo_rms[t_start]], [np.min(rms_norm), np.max(rms_norm)], '--k')
-        ax.plot([tempo_rms[t_start+300], tempo_rms[t_start+300]], [np.min(rms_norm), np.max(rms_norm)], '--r')
-        ax.plot([tempo_rms[t_start+600], tempo_rms[t_start+600]], [np.min(rms_norm), np.max(rms_norm)], '--k')
-        ax.plot([tempo_rms[t_start+900], tempo_rms[t_start+900]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_30plus], tempo_rms[t_30plus]], [np.min(rms_norm), np.max(rms_norm)], '--r')
+        ax.plot([tempo_rms[t_60plus], tempo_rms[t_60plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_90plus], tempo_rms[t_90plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_120plus], tempo_rms[t_120plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_150plus], tempo_rms[t_150plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_180plus], tempo_rms[t_180plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_210plus], tempo_rms[t_210plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_240plus], tempo_rms[t_240plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_270plus], tempo_rms[t_270plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
+        ax.plot([tempo_rms[t_300plus], tempo_rms[t_300plus]], [np.min(rms_norm), np.max(rms_norm)], '--k')
         ax.plot([4, 4], [np.min(rms_norm), np.max(rms_norm)], '--b')
         ax.set_xlabel('Time (s)')
         ax.set_ylabel('RMS amplitude (g)')
@@ -176,18 +230,18 @@ with col2:
             return np.mean(lista[i1:i2]) if i2 <= len(lista) else np.nan
 
         resultados = [
-            media_segura(rms_norm, t_start-600, t_start-300),
-            media_segura(rms_norm, t_start-300, t_start),
-            media_segura(rms_norm, t_start, t_start+300),
-            media_segura(rms_norm, t_start+300, t_start+600),
-            media_segura(rms_norm, t_start+600, t_start+900),
-            media_segura(rms_norm, t_start+900, t_start+1200),
-            media_segura(rms_norm, t_start+1200, t_start+1500),
-            media_segura(rms_norm, t_start+1500, t_start+1800),
-            media_segura(rms_norm, t_start+1800, t_start+2100),
-            media_segura(rms_norm, t_start+2100, t_start+2400),
-            media_segura(rms_norm, t_start+2400, t_start+2700),
-            media_segura(rms_norm, t_start+2700, t_start+3000),
+            media_segura(rms_norm, t_60minus, t_30minus),
+            media_segura(rms_norm, t_30minus, t_start),
+            media_segura(rms_norm, t_start, t_30plus),
+            media_segura(rms_norm, t_30plus, t_60plus),
+            media_segura(rms_norm, t_60plus, t_90plus),
+            media_segura(rms_norm, t_90plus, t_120plus),
+            media_segura(rms_norm, t_120plus, t_150plus),
+            media_segura(rms_norm, t_150plus, t_180plus),
+            media_segura(rms_norm, t_180plus, t_210plus),
+            media_segura(rms_norm, t_210plus, t_240plus),
+            media_segura(rms_norm, t_240plus, t_270plus),
+            media_segura(rms_norm, t_270plus, t_300plus),
         ]
         st.text(str(t_start)) 
         st.text('Média do tremor em -60 a -30 s: ' + str(round(resultados[0],4)))
