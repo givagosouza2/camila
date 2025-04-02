@@ -315,6 +315,17 @@ with col1:
             st.text('LFHF 240 a 270 s: ' + str(round(lf_hf_240plus_270plus,2)))
             st.text('LFHF 270 a 300 s: ' + str(round(lf_hf_270plus_300plus,2)))        
 
+               
+        output_file_5 = "output5.txt"
+        with open(output_file_5, "w") as file:
+            file.write("\n".join(str(val)
+                       for val in resultados_hrv if not np.isnan(val)))
+
+        with open(output_file_5, "r") as file:
+            contents = file.read()
+        st.download_button("Baixar resultados - mean HRV",
+                           data=contents, key='download_results_meanHrv')
+        
         resultados_vlf = [
             round((10**9)*vlf_60minus_30minus,3),
             round((10**9)*vlf_30minus_start,3),
