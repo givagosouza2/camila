@@ -184,9 +184,8 @@ with col2:
             media_segura(moving_average_tremor, t_start+2400, t_start+2700),
             media_segura(moving_average_tremor, t_start+2700, t_start+3000),
         ]
-        st.text('Média do tremor em -60 a -30 s:' + media_segura(moving_average_tremor, t_start-600, t_start-300))
-        st.text('Média do tremor em -30 a 0 s:' + media_segura(moving_average_tremor, t_start-300, t_start))
-        st.text('Média do tremor em 0 a 30 s:' + media_segura(moving_average_tremor, t_start, t_start+300))
+        st.text('Média do tremor em -60 a -30 s:' + str(resultados[0]))
+        
 
         output_file = "output.txt"
         with open(output_file, "w") as file:
