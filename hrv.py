@@ -288,6 +288,19 @@ with col1:
             st.text('LF 210 s a 240 s: ' + str((10**9)*lf_210plus_240plus))
             st.text('LF 240 s a 270 s: ' + str((10**9)*lf_240plus_270plus))
             st.text('LF 270 s a 300 s: ' + str((10**9)*lf_270plus_300plus))
+        with c3:    
+            st.text('HF -60 s a -30 s: ' + str((10**9)*hf_60minus_30minus))
+            st.text('HF -30 s a 0 s: ' + str((10**9)*hf_30minus_start))
+            st.text('HF 0 s a 30 s: ' + str((10**9)*hf_start_30plus))
+            st.text('HF 30 s a 60 s: ' + str((10**9)*hf_30plus_60plus))
+            st.text('HF 60 s a 90 s: ' + str((10**9)*hf_60plus_90plus))
+            st.text('HF 90 s a 120 s: ' + str((10**9)*hf_90plus_120plus))
+            st.text('HF 120 s a 150 s: ' + str((10**9)*hf_120plus_150plus))
+            st.text('HF 150 s a 180 s: ' + str((10**9)*hf_150plus_180plus))
+            st.text('HF 180 s a 210 s: ' + str((10**9)*hf_180plus_210plus))
+            st.text('HF 210 s a 240 s: ' + str((10**9)*hf_210plus_240plus))
+            st.text('HF 240 s a 270 s: ' + str((10**9)*hf_240plus_270plus))
+            st.text('HF 270 s a 300 s: ' + str((10**9)*hf_270plus_300plus))    
 
         
         
