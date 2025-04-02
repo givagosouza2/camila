@@ -162,7 +162,7 @@ with col2:
         ax.plot(tempo_rms, rms_norm, 'black')
         ax.plot(tempo_rms, moving_average_tremor, 'r')
         ax.plot([tempo_rms[t_start-300], tempo_rms[t_start-300]], [np.min(rms_norm), np.max(rms_norm)], '--k')
-        ax.plot([tempo_rms[t_start], tempo_rms[t_start]], [np.min(rms_norm), np.max(rms_norm)], '--r')
+        ax.plot([tempo_rms[t_start], tempo_rms[t_start]], [np.min(rms_norm), np.max(rms_norm)], '--k')
         ax.plot([tempo_rms[t_start+300], tempo_rms[t_start+300]], [np.min(rms_norm), np.max(rms_norm)], '--r')
         ax.plot([tempo_rms[t_start+600], tempo_rms[t_start+600]], [np.min(rms_norm), np.max(rms_norm)], '--k')
         ax.plot([tempo_rms[t_start+900], tempo_rms[t_start+900]], [np.min(rms_norm), np.max(rms_norm)], '--k')
