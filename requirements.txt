@@ -1,5 +1,5 @@
 streamlit
-hrvanalysis
+hrv-analysis
 pandas
 numpy
 matplotlib
