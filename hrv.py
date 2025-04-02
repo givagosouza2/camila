@@ -150,8 +150,12 @@ with col2:
             rms_norm.append(np.sqrt(rms_x + rms_y + rms_z))
             tempo_rms.append(t_point[i])
 
+        norma_series = pd.Series(rms_norm)
+        moving_average_tremor = norma_series.rolling(window=10).mean()
+
         fig, ax = plt.subplots()
         ax.plot(tempo_rms, rms_norm, 'black')
+        ax.plot(tempo_rms, moving_average_tremor, 'r')
         ax.plot([5, 5], [np.min(rms_norm), np.max(rms_norm)], '--r')
         ax.plot([4, 4], [np.min(rms_norm), np.max(rms_norm)], '--b')
         ax.set_xlabel('Time (s)')
