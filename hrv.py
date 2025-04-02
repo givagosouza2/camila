@@ -108,7 +108,7 @@ with col1:
             if t_val >= 9.5:
                 t_270plus_hrv = index
                 break
-         for index, t_val in enumerate(tempo_min):
+        for index, t_val in enumerate(tempo_min):
             if t_val >= 10:
                 t_300plus_hrv = index
                 break       
