@@ -60,6 +60,58 @@ with col1:
         nn_series = pd.Series(nn_intervals)
         moving_average = nn_series.rolling(window=10).mean()
 
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 4:
+                t_60minus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 4.5:
+                t_30minus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 5:
+                t_start_hrv = index
+                break  
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 5.5:
+                t_30plus_hrv = index
+                break       
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 6:
+                t_60plus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 6.5:
+                t_90plus_hrv = index
+                break               
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 7:
+                t_120plus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 7.5:
+                t_150plus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 8:
+                t_180plus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 8.5:
+                t_210plus_hrv = index
+                break
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 9:
+                t_240plus_hrv = index
+                break    
+        for index, t_val in enumerate(tempo_min):
+            if t_val >= 9.5:
+                t_270plus_hrv = index
+                break
+         for index, t_val in enumerate(tempo_min):
+            if t_val >= 10:
+                t_300plus_hrv = index
+                break       
         fig, ax = plt.subplots()
         ax.set_ylabel("RR Interval (ms)", fontsize=15)
         ax.set_xlabel("Time (min)", fontsize=15)
@@ -69,55 +121,193 @@ with col1:
         ax.plot([5, 5], [600, 1000], '--r')
         st.pyplot(fig)
 
-        try:
-            nn_sec = np.array(nn_intervals) / 1000
-            frequencies, psd = calcular_psd(nn_sec, 4)
+        def media_segura_hrv(lista, i1, i2):
+            return np.mean(lista[i1:i2]) if i2 <= len(lista) else np.nan
 
-            st.subheader("Gráfico da Densidade Espectral de Potência (PSD)")
-            fig, ax = plt.subplots(figsize=(10, 6))
-            ax.semilogy(frequencies, psd)
-            ax.set_title('Densidade Espectral de Potência (PSD)')
-            ax.set_xlabel('Frequência (Hz)')
-            ax.set_ylabel('Densidade de Potência')
-            ax.grid()
-            st.pyplot(fig)
+        resultados_hrv = [
+            media_segura(nn_intervals, t_60minus_hrv, t_30minus_hrv),
+            media_segura(nn_intervals, t_30minus_hrv, t_start_hrv),
+            media_segura(nn_intervals, t_start_hrv, t_30plus_hrv),
+            media_segura(nn_intervals, t_30plus_hrv, t_60plus_hrv),
+            media_segura(nn_intervals, t_60plus_hrv, t_90plus_hrv),
+            media_segura(nn_intervals, t_90plus_hrv, t_120plus),
+            media_segura(nn_intervals, t_120plus_hrv, t_150plus),
+            media_segura(nn_intervals, t_150plus_hrv, t_180plus),
+            media_segura(nn_intervals, t_180plus_hrv, t_210plus),
+            media_segura(nn_intervals, t_210plus_hrv, t_240plus),
+            media_segura(nn_intervals, t_240plus_hrv, t_270plus),
+            media_segura(nn_intervals, t_270plus_hrv, t_300plus_hrv),
+        ]
+        
+        def calcular_potencia(f, p, faixa):
+            idx = np.logical_and(f >= faixa[0], f < faixa[1])
+            return np.trapz(p[idx], f[idx])
+        nn_sec = np.array(nn_intervals[t_60minus_hrv, t_30minus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_60minus_30minus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_60minus_30minus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_60minus_30minus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_60minus_30minus = vlf_60minus_30minus + lf_60minus_30minus + hf_60minus_30minus
+        lf_rel_60minus_30minus = (lf_60minus_30minus / total_60minus_30minus) * 100
+        hf_rel_60minus_30minus = (hf_60minus_30minus / total_60minus_30minus) * 100
+        lf_hf_60minus_30minus = lf_60minus_30minus / hf_60minus_30minus
 
-            sdnn = np.std(nn_intervals, ddof=1)
-            rmssd = np.sqrt(np.mean(np.diff(nn_intervals) ** 2))
-            diff_nn = np.abs(np.diff(nn_intervals))
-            pnn50 = np.sum(diff_nn > 50) / len(diff_nn) * 100
+        nn_sec = np.array(nn_intervals[t_30minus_hrv, t_start_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_30minus_start = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_30minus_start = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_30minus_start = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_30minus_start = vlf_30minus_start + lf_30minus_start + hf_30minus_start
+        lf_rel_30minus_start = (lf_30minus_start / total_30minus_start) * 100
+        hf_rel_30minus_start = (hf_30minus_start / total_30minus_start) * 100
+        lf_hf_30minus_start = lf_30minus_start / hf_30minus_start
 
-            def calcular_potencia(f, p, faixa):
-                idx = np.logical_and(f >= faixa[0], f < faixa[1])
-                return np.trapz(p[idx], f[idx])
+        nn_sec = np.array(nn_intervals[t_start_hrv, t_30plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_start_30plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_start_30plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_start_30plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_start_30plus = vlf_start_30plus + lf_start_30plus + hf_start_30plus
+        lf_rel_start_30plus = (lf_start_30plus / total_start_30plus) * 100
+        hf_rel_start_30plus = (hf_start_30plus / total_start_30plus) * 100
+        lf_hf_start_30plus = lf_start_30plus / hf_start_30plus
 
-            vlf = calcular_potencia(frequencies, psd, (0.003, 0.04))
-            lf = calcular_potencia(frequencies, psd, (0.04, 0.15))
-            hf = calcular_potencia(frequencies, psd, (0.15, 0.4))
-            total = vlf + lf + hf
-            lf_rel = (lf / total) * 100
-            hf_rel = (hf / total) * 100
-            lf_hf = lf / hf
+        nn_sec = np.array(nn_intervals[t_30plus_hrv, t_60plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_30plus_60plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_30plus_60plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_30plus_60plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_30plus_60plus = vlf_30plus_60plus + lf_30plus_60plus + hf_30plus_60plus
+        lf_rel_30plus_60plus = (lf_30plus_60plus / total_30plus_60plus) * 100
+        hf_rel_30plus_60plus = (hf_30plus_60plus / total_30plus_60plus) * 100
+        lf_hf_30plus_60plus = lf_30plus_60plus / hf_30plus_60plus
 
-            st.text(f'VLF power: {vlf}')
-            st.text(f'LF power: {lf}')
-            st.text(f'HF power: {hf}')
-            st.text(f'Total power: {total}')
-            st.text(f'Relative LF: {lf_rel}')
-            st.text(f'Relative HF: {hf_rel}')
-            st.text(f'LF/HF: {lf_hf}')
+        nn_sec = np.array(nn_intervals[t_60plus_hrv, t_90plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_60plus_90plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_60plus_90plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_60plus_90plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_60plus_90plus = vlf_60plus_90plus + lf_60plus_90plus + hf_60plus_90plus
+        lf_rel_60plus_90plus = (lf_60plus_90plus / total_60plus_90plus) * 100
+        hf_rel_60plus_90plus = (hf_60plus_90plus / total_60plus_90plus) * 100
+        lf_hf_60plus_90plus = lf_60plus_90plus / hf_60plus_90plus
 
-            output_file = "output.txt"
-            with open(output_file, "w") as file:
-                file.write(
-                    f"{vlf}\n{lf}\n{hf}\n{total}\n{lf_rel}\n{hf_rel}\n{lf_hf}\n")
-            with open(output_file, "r") as file:
-                contents = file.read()
-            st.download_button("Baixar resultados - VFC",
-                               data=contents, key='download_results_vfc')
+        nn_sec = np.array(nn_intervals[t_90plus_hrv, t_120plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_90plus_120plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_90plus_120plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_90plus_120plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_90plus_120plus = vlf_90plus_120plus + lf_90plus_120plus + hf_90plus_120plus
+        lf_rel_90plus_120plus = (lf_90plus_120plus / total_90plus_120plus) * 100
+        hf_rel_90plus_120plus = (hf_90plus_120plus / total_90plus_120plus) * 100
+        lf_hf_90plus_120plus = lf_90plus_120plus / hf_90plus_120plus
 
-        except Exception as e:
-            st.error(f"Erro ao processar os dados: {e}")
+        nn_sec = np.array(nn_intervals[t_120plus_hrv, t_150plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_120plus_150plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_120plus_150plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_120plus_150plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_120plus_150plus = vlf_120plus_150plus + lf_120plus_150plus + hf_120plus_150plus
+        lf_rel_120plus_150plus = (lf_120plus_150plus / total_120plus_150plus) * 100
+        hf_rel_120plus_150plus = (hf_120plus_150plus / total_120plus_150plus) * 100
+        lf_hf_120plus_150plus = lf_120plus_150plus / hf_120plus_150plus
+
+        nn_sec = np.array(nn_intervals[t_150plus_hrv, t_180plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_150plus_180plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_150plus_180plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_150plus_180plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_150plus_180plus = vlf_150plus_180plus + lf_150plus_180plus + hf_150plus_180plus
+        lf_rel_150plus_180plus = (lf_150plus_180plus / total_150plus_180plus) * 100
+        hf_rel_150plus_180plus = (hf_150plus_180plus / total_150plus_180plus) * 100
+        lf_hf_150plus_180plus = lf_150plus_180plus / hf_150plus_180plus
+
+        nn_sec = np.array(nn_intervals[t_180plus_hrv, t_210plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_180plus_210plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_180plus_210plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_180plus_210plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_180plus_210plus = vlf_180plus_210plus + lf_180plus_210plus + hf_180plus_210plus
+        lf_rel_180plus_210plus = (lf_180plus_210plus / total_180plus_210plus) * 100
+        hf_rel_180plus_210plus = (hf_180plus_210plus / total_180plus_210plus) * 100
+        lf_hf_180plus_210plus = lf_180plus_210plus / hf_180plus_210plus
+
+        nn_sec = np.array(nn_intervals[t_210plus_hrv, t_240plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_210plus_240plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_210plus_240plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_210plus_240plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_210plus_240plus = vlf_210plus_240plus + lf_210plus_240plus + hf_210plus_240plus
+        lf_rel_210plus_240plus = (lf_210plus_240plus / total_210plus_240plus) * 100
+        hf_rel_210plus_240plus = (hf_210plus_240plus / total_210plus_240plus) * 100
+        lf_hf_210plus_240plus = lf_210plus_240plus / hf_210plus_240plus
+
+        nn_sec = np.array(nn_intervals[t_240plus_hrv, t_270plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_240plus_270plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_240plus_270plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_240plus_270plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_240plus_270plus = vlf_240plus_270plus + lf_240plus_270plus + hf_240plus_270plus
+        lf_rel_240plus_270plus = (lf_240plus_270plus / total_240plus_270plus) * 100
+        hf_rel_240plus_270plus = (hf_240plus_270plus / total_240plus_270plus) * 100
+        lf_hf_240plus_270plus = lf_240plus_270plus / hf_240plus_270plus
+
+        nn_sec = np.array(nn_intervals[t_270plus_hrv, t_300plus_hrv]) / 1000
+        frequencies, psd = calcular_psd(nn_sec, 4)
+        vlf_270plus_300plus = calcular_potencia(frequencies, psd, (0.003, 0.04))
+        lf_270plus_300plus = calcular_potencia(frequencies, psd, (0.04, 0.15))
+        hf_270plus_300plus = calcular_potencia(frequencies, psd, (0.15, 0.4))
+        total_270plus_300plus = vlf_270plus_300plus + lf_270plus_300plus + hf_270plus_300plus
+        lf_rel_270plus_300plus = (lf_270plus_300plus / total_270plus_300plus) * 100
+        hf_rel_270plus_300plus = (hf_270plus_300plus / total_270plus_300plus) * 100
+        lf_hf_270plus_300plus = lf_270plus_300plus / hf_270plus_300plus
+        c1,c2,c3 = st.columns(3)
+        with c1:
+            st.text('VLF -60 s a -30 s: ' + str(vlf_60minus_30minus))
+            st.text('VLF -30 s a 0 s: ' + str(vlf_30minus_start))
+            st.text('VLF 0 s a 30 s: ' + str(vlf_start_30plus))
+            st.text('VLF 30 s a 60 s: ' + str(vlf_30plus_60plus))
+            st.text('VLF 60 s a 90 s: ' + str(vlf_60plus_90plus))
+            st.text('VLF 90 s a 120 s: ' + str(vlf_90plus_120plus))
+            st.text('VLF 120 s a 150 s: ' + str(vlf_120plus_150plus))
+            st.text('VLF 150 s a 180 s: ' + str(vlf_150plus_180plus))
+            st.text('VLF 180 s a 210 s: ' + str(vlf_180plus_210plus))
+            st.text('VLF 210 s a 240 s: ' + str(vlf_210plus_240plus))
+            st.text('VLF 240 s a 270 s: ' + str(vlf_240plus_270plus))
+            st.text('VLF 270 s a 300 s: ' + str(vlf_270plus_300plus))
+
+        
+        
+        #try:
+        #    nn_sec = np.array(nn_intervals) / 1000
+        #    frequencies, psd = calcular_psd(nn_sec, 4)
+
+        #    st.subheader("Gráfico da Densidade Espectral de Potência (PSD)")
+        #    fig, ax = plt.subplots(figsize=(10, 6))
+        #    ax.semilogy(frequencies, psd)
+        #    ax.set_title('Densidade Espectral de Potência (PSD)')
+        #    ax.set_xlabel('Frequência (Hz)')
+        #    ax.set_ylabel('Densidade de Potência')
+        #   ax.grid()
+        #    st.pyplot(fig)
+
+        #   sdnn = np.std(nn_intervals, ddof=1)
+        #    rmssd = np.sqrt(np.mean(np.diff(nn_intervals) ** 2))
+        #    diff_nn = np.abs(np.diff(nn_intervals))
+        #    pnn50 = np.sum(diff_nn > 50) / len(diff_nn) * 100
+
+            
+        
+
+        #    st.text(f'VLF power: {vlf}')
+        #    st.text(f'LF power: {lf}')
+        #    st.text(f'HF power: {hf}')
+        #    st.text(f'Total power: {total}')
+        #    st.text(f'Relative LF: {lf_rel}')
+        #    st.text(f'Relative HF: {hf_rel}')
+        #    st.text(f'LF/HF: {lf_hf}')
+
+       
 
 with col2:
     uploaded_file = st.file_uploader(
@@ -243,7 +433,7 @@ with col2:
             media_segura(rms_norm, t_240plus, t_270plus),
             media_segura(rms_norm, t_270plus, t_300plus),
         ]
-        st.text(str(t_start)) 
+       
         st.text('Média do tremor em -60 a -30 s: ' + str(round(resultados[0],4)))
         st.text('Média do tremor em -30 a 0 s: ' + str(round(resultados[1],4)))
         st.text('Média do tremor em 0 a 30 s: ' + str(round(resultados[2],4)))
