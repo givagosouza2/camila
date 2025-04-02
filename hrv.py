@@ -171,18 +171,18 @@ with col2:
             return np.mean(lista[i1:i2]) if i2 <= len(lista) else np.nan
 
         resultados = [
-            media_segura(moving_average_tremor, t_start-600, t_start-300),
-            media_segura(moving_average_tremor, t_start-300, t_start),
-            media_segura(moving_average_tremor, t_start, t_start+300),
-            media_segura(moving_average_tremor, t_start+300, t_start+600),
-            media_segura(moving_average_tremor, t_start+600, t_start+900),
-            media_segura(moving_average_tremor, t_start+900, t_start+1200),
-            media_segura(moving_average_tremor, t_start+1200, t_start+1500),
-            media_segura(moving_average_tremor, t_start+1500, t_start+1800),
-            media_segura(moving_average_tremor, t_start+1800, t_start+2100),
-            media_segura(moving_average_tremor, t_start+2100, t_start+2400),
-            media_segura(moving_average_tremor, t_start+2400, t_start+2700),
-            media_segura(moving_average_tremor, t_start+2700, t_start+3000),
+            media_segura(rms_norm, t_start-600, t_start-300),
+            media_segura(rms_norm, t_start-300, t_start),
+            media_segura(rms_norm, t_start, t_start+300),
+            media_segura(rms_norm, t_start+300, t_start+600),
+            media_segura(rms_norm, t_start+600, t_start+900),
+            media_segura(rms_norm, t_start+900, t_start+1200),
+            media_segura(rms_norm, t_start+1200, t_start+1500),
+            media_segura(rms_norm, t_start+1500, t_start+1800),
+            media_segura(rms_norm, t_start+1800, t_start+2100),
+            media_segura(rms_norm, t_start+2100, t_start+2400),
+            media_segura(rms_norm, t_start+2400, t_start+2700),
+            media_segura(rms_norm, t_start+2700, t_start+3000),
         ]
         st.text('Média do tremor em -60 a -30 s: ' + str(round(resultados[0],4)))
         st.text('Média do tremor em -30 a 0 s: ' + str(round(resultados[1],4)))
