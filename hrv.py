@@ -66,7 +66,7 @@ with col1:
         ax.plot(tempo_min, nn_intervals, 'k')
         ax.plot(tempo_min, moving_average, 'r')
         ax.plot([4, 4], [600, 1000], '--b')
-        ax.plot([5, 5], [600, 1000], '--b')
+        ax.plot([5, 5], [600, 1000], '--r')
         st.pyplot(fig)
 
         try:
