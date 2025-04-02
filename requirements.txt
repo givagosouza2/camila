@@ -1,6 +1,6 @@
+streamlit
 hrvanalysis
 pandas
 numpy
 matplotlib
-streamlit
 scipy
