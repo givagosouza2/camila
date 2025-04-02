@@ -315,8 +315,105 @@ with col1:
             st.text('LFHF 240 a 270 s: ' + str(round(lf_hf_240plus_270plus,2)))
             st.text('LFHF 270 a 300 s: ' + str(round(lf_hf_270plus_300plus,2)))        
 
+        resultados_vlf = [
+            round((10**9)*vlf_60minus_30minus,3),
+            round((10**9)*vlf_30minus_start,3),
+            round((10**9)*vlf_start_30plus,3),
+            round((10**9)*vlf_30plus_60plus,3),
+            round((10**9)*vlf_60plus_90plus,3),
+            round((10**9)*vlf_90plus_120plus,3),
+            round((10**9)*vlf_120plus_150plus,3),
+            round((10**9)*vlf_150plus_180plus,3),
+            round((10**9)*vlf_180plus_210plus,3),
+            round((10**9)*vlf_210plus_240plus,3),
+            round((10**9)*vlf_240plus_270plus,3),
+            round((10**9)*vlf_270plus_300plus,3),
+            ]
         
+        output_file_1 = "output1.txt"
+        with open(output_file, "w") as file:
+            file.write("\n".join(str(val)
+                       for val in resultados_vlf if not np.isnan(val)))
+
+        with open(output_file, "r") as file:
+            contents = file.read()
+        st.download_button("Baixar resultados - VLF",
+                           data=contents, key='download_results_vlf')
+
+        resultados_lf = [
+            round((10**11)*lf_60minus_30minus,3),
+            round((10**11)*lf_30minus_start,3),
+            round((10**11)*lf_start_30plus,3),
+            round((10**11)*lf_30plus_60plus,3),
+            round((10**11)*lf_60plus_90plus,3),
+            round((10**11)*lf_90plus_120plus,3),
+            round((10**11)*lf_120plus_150plus,3),
+            round((10**11)*lf_150plus_180plus,3),
+            round((10**11)*lf_180plus_210plus,3),
+            round((10**11)*lf_210plus_240plus,3),
+            round((10**11)*lf_240plus_270plus,3),
+            round((10**11)*lf_270plus_300plus,3),
+            ]
         
+        output_file_2 = "output2.txt"
+        with open(output_file_2, "w") as file:
+            file.write("\n".join(str(val)
+                       for val in resultados_lf if not np.isnan(val)))
+
+        with open(output_file_2, "r") as file:
+            contents = file.read()
+        st.download_button("Baixar resultados - LF",
+                           data=contents, key='download_results_lf')
+
+        resultados_hf = [
+            round((10**13)*hf_60minus_30minus,3),
+            round((10**13)*hf_30minus_start,3),
+            round((10**13)*hf_start_30plus,3),
+            round((10**13)*hf_30plus_60plus,3),
+            round((10**13)*hf_60plus_90plus,3),
+            round((10**13)*hf_90plus_120plus,3),
+            round((10**13)*hf_120plus_150plus,3),
+            round((10**13)*hf_150plus_180plus,3),
+            round((10**13)*hf_180plus_210plus,3),
+            round((10**13)*hf_210plus_240plus,3),
+            round((10**13)*hf_240plus_270plus,3),
+            round((10**13)*hf_270plus_300plus,3),
+            ]
+        
+        output_file_3 = "output3.txt"
+        with open(output_file_3, "w") as file:
+            file.write("\n".join(str(val)
+                       for val in resultados_hf if not np.isnan(val)))
+
+        with open(output_file_3, "r") as file:
+            contents = file.read()
+        st.download_button("Baixar resultados - HF",
+                           data=contents, key='download_results_hf')
+
+        resultados_lfhf = [
+            round(lf_hf_60minus_30minus,3),
+            round(lf_hf_30minus_start,3),
+            round(lf_hf_start_30plus,3),
+            round(lf_hf_30plus_60plus,3),
+            round(lf_hf_60plus_90plus,3),
+            round(lf_hf_90plus_120plus,3),
+            round(lf_hf_120plus_150plus,3),
+            round(lf_hf_150plus_180plus,3),
+            round(lf_hf_180plus_210plus,3),
+            round(lf_hf_210plus_240plus,3),
+            round(lf_hf_240plus_270plus,3),
+            round(lf_hf_270plus_300plus,3),
+            ]
+        
+        output_file_4 = "output4.txt"
+        with open(output_file_4, "w") as file:
+            file.write("\n".join(str(val)
+                       for val in resultados_lfhf if not np.isnan(val)))
+
+        with open(output_file_4, "r") as file:
+            contents = file.read()
+        st.download_button("Baixar resultados - LFHF",
+                           data=contents, key='download_results_lfhf')
         #try:
         #    nn_sec = np.array(nn_intervals) / 1000
         #    frequencies, psd = calcular_psd(nn_sec, 4)
