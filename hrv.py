@@ -414,35 +414,7 @@ with col1:
             contents = file.read()
         st.download_button("Baixar resultados - LFHF",
                            data=contents, key='download_results_lfhf')
-        #try:
-        #    nn_sec = np.array(nn_intervals) / 1000
-        #    frequencies, psd = calcular_psd(nn_sec, 4)
-
-        #    st.subheader("Gráfico da Densidade Espectral de Potência (PSD)")
-        #    fig, ax = plt.subplots(figsize=(10, 6))
-        #    ax.semilogy(frequencies, psd)
-        #    ax.set_title('Densidade Espectral de Potência (PSD)')
-        #    ax.set_xlabel('Frequência (Hz)')
-        #    ax.set_ylabel('Densidade de Potência')
-        #   ax.grid()
-        #    st.pyplot(fig)
-
-        #   sdnn = np.std(nn_intervals, ddof=1)
-        #    rmssd = np.sqrt(np.mean(np.diff(nn_intervals) ** 2))
-        #    diff_nn = np.abs(np.diff(nn_intervals))
-        #    pnn50 = np.sum(diff_nn > 50) / len(diff_nn) * 100
-
-            
         
-
-        #    st.text(f'VLF power: {vlf}')
-        #    st.text(f'LF power: {lf}')
-        #    st.text(f'HF power: {hf}')
-        #    st.text(f'Total power: {total}')
-        #    st.text(f'Relative LF: {lf_rel}')
-        #    st.text(f'Relative HF: {hf_rel}')
-        #    st.text(f'LF/HF: {lf_hf}')
-
        
 
 with col2:
