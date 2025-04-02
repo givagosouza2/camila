@@ -331,7 +331,7 @@ with col1:
             ]
         
         output_file_1 = "output1.txt"
-        with open(output_file, "w") as file:
+        with open(output_file_1, "w") as file:
             file.write("\n".join(str(val)
                        for val in resultados_vlf if not np.isnan(val)))
 
