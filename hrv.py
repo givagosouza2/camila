@@ -58,7 +58,7 @@ with col1:
         tempo_min = [round(0 + i * intervalo, 2) for i in range(tamanho_lista)]
 
         nn_series = pd.Series(nn_intervals)
-        moving_average = nn_series.rolling(window=60).mean()
+        moving_average = nn_series.rolling(window=10).mean()
 
         fig, ax = plt.subplots()
         ax.set_ylabel("RR Interval (ms)", fontsize=15)
