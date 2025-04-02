@@ -153,6 +153,11 @@ with col2:
         norma_series = pd.Series(rms_norm)
         moving_average_tremor = norma_series.rolling(window=1000).mean()
 
+        for index, t_val in enumerate(tempo_rms):
+            if t_val >= 5:
+                t_start = index
+                break
+
         fig, ax = plt.subplots()
         ax.plot(tempo_rms, rms_norm, 'black')
         ax.plot(tempo_rms, moving_average_tremor, 'r')
@@ -162,11 +167,7 @@ with col2:
         ax.set_ylabel('RMS amplitude (g)')
         st.pyplot(fig)
 
-        for index, t_val in enumerate(tempo_rms):
-            if t_val >= 5:
-                t_start = index
-                break
-
+        
         def media_segura(lista, i1, i2):
             return np.mean(lista[i1:i2]) if i2 <= len(lista) else np.nan
 
