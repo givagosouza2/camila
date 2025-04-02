@@ -130,12 +130,12 @@ with col1:
             media_segura_hrv(nn_intervals, t_start_hrv, t_30plus_hrv),
             media_segura_hrv(nn_intervals, t_30plus_hrv, t_60plus_hrv),
             media_segura_hrv(nn_intervals, t_60plus_hrv, t_90plus_hrv),
-            media_segura_hrv(nn_intervals, t_90plus_hrv, t_120plus),
-            media_segura_hrv(nn_intervals, t_120plus_hrv, t_150plus),
-            media_segura_hrv(nn_intervals, t_150plus_hrv, t_180plus),
-            media_segura_hrv(nn_intervals, t_180plus_hrv, t_210plus),
-            media_segura_hrv(nn_intervals, t_210plus_hrv, t_240plus),
-            media_segura_hrv(nn_intervals, t_240plus_hrv, t_270plus),
+            media_segura_hrv(nn_intervals, t_90plus_hrv, t_120plus_hrv),
+            media_segura_hrv(nn_intervals, t_120plus_hrv, t_150plus_hrv),
+            media_segura_hrv(nn_intervals, t_150plus_hrv, t_180plus_hrv),
+            media_segura_hrv(nn_intervals, t_180plus_hrv, t_210plus_hrv),
+            media_segura_hrv(nn_intervals, t_210plus_hrv, t_240plus_hrv),
+            media_segura_hrv(nn_intervals, t_240plus_hrv, t_270plus_hrv),
             media_segura_hrv(nn_intervals, t_270plus_hrv, t_300plus_hrv),
         ]
         
