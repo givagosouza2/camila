@@ -184,7 +184,19 @@ with col2:
             media_segura(moving_average_tremor, t_start+2400, t_start+2700),
             media_segura(moving_average_tremor, t_start+2700, t_start+3000),
         ]
-        st.text('Média do tremor em -60 a -30 s:' + str(resultados[0]))
+        st.text('Média do tremor em -60 a -30 s: ' + str(round(resultados[0],2)))
+        st.text('Média do tremor em -30 a 0 s: ' + str(round(resultados[1],2)))
+        st.text('Média do tremor em 0 a 30 s: ' + str(round(resultados[2],2)))
+        st.text('Média do tremor em 30 a 60 s: ' + str(round(resultados[3],2)))
+        st.text('Média do tremor em 60 a 90 s: ' + str(round(resultados[4],2)))
+        st.text('Média do tremor em 90 a 120 s: ' + str(round(resultados[5],2)))
+        st.text('Média do tremor em 120 a 150 s: ' + str(round(resultados[6],2)))
+        st.text('Média do tremor em 150 a 180 s: ' + str(round(resultados[7],2)))
+        st.text('Média do tremor em 180 a 210 s: ' + str(round(resultados[8],2)))
+        st.text('Média do tremor em 210 a 240 s: ' + str(round(resultados[9],2)))
+        st.text('Média do tremor em 240 a 270 s: ' + str(round(resultados[10],2)))
+        st.text('Média do tremor em 270 a 300 s: ' + str(round(resultados[11],2)))
+        
         
 
         output_file = "output.txt"
