@@ -184,6 +184,7 @@ with col2:
             media_segura(rms_norm, t_start+2400, t_start+2700),
             media_segura(rms_norm, t_start+2700, t_start+3000),
         ]
+        st.text(str(t_start)) 
         st.text('Média do tremor em -60 a -30 s: ' + str(round(resultados[0],4)))
         st.text('Média do tremor em -30 a 0 s: ' + str(round(resultados[1],4)))
         st.text('Média do tremor em 0 a 30 s: ' + str(round(resultados[2],4)))
