@@ -261,7 +261,7 @@ with col1:
         lf_rel_270plus_300plus = (lf_270plus_300plus / total_270plus_300plus) * 100
         hf_rel_270plus_300plus = (hf_270plus_300plus / total_270plus_300plus) * 100
         lf_hf_270plus_300plus = lf_270plus_300plus / hf_270plus_300plus
-        c1,c2,c3 = st.columns(3)
+        c1,c2,c3,c4 = st.columns(4)
         with c1:
             st.text('VLF -60 s a -30 s: ' + str((10**9)*vlf_60minus_30minus))
             st.text('VLF -30 s a 0 s: ' + str((10**9)*vlf_30minus_start))
@@ -301,6 +301,19 @@ with col1:
             st.text('HF 210 s a 240 s: ' + str((10**9)*hf_210plus_240plus))
             st.text('HF 240 s a 270 s: ' + str((10**9)*hf_240plus_270plus))
             st.text('HF 270 s a 300 s: ' + str((10**9)*hf_270plus_300plus))    
+        with c4:    
+            st.text('LFHF ratio -60 s a -30 s: ' + str(lf_hf_60minus_30minus))
+            st.text('LFHF ratio -30 s a 0 s: ' + str(lf_hf_30minus_start))
+            st.text('LFHF ratio 0 s a 30 s: ' + str(lf_hf_start_30plus))
+            st.text('LFHF ratio 30 s a 60 s: ' + str(lf_hf_30plus_60plus))
+            st.text('LFHF ratio 60 s a 90 s: ' + str(lf_hf_60plus_90plus))
+            st.text('LFHF ratio 90 s a 120 s: ' + str(lf_hf_90plus_120plus))
+            st.text('LFHF ratio 120 s a 150 s: ' + str(lf_hf_120plus_150plus))
+            st.text('LFHF ratio 150 s a 180 s: ' + str(lf_hf_150plus_180plus))
+            st.text('LFHF ratio 180 s a 210 s: ' + str(lf_hf_180plus_210plus))
+            st.text('LFHF ratio 210 s a 240 s: ' + str(lf_hf_210plus_240plus))
+            st.text('LFHF ratio 240 s a 270 s: ' + str(lf_hf_240plus_270plus))
+            st.text('LFHF ratio 270 s a 300 s: ' + str(lf_hf_270plus_300plus))        
 
         
         
