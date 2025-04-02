@@ -151,7 +151,7 @@ with col2:
             tempo_rms.append(t_point[i])
 
         norma_series = pd.Series(rms_norm)
-        moving_average_tremor = norma_series.rolling(window=10).mean()
+        moving_average_tremor = norma_series.rolling(window=1000).mean()
 
         fig, ax = plt.subplots()
         ax.plot(tempo_rms, rms_norm, 'black')
